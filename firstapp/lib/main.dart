@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  TextEditingController quality = TextEditingController(); 
+  TextEditingController quality = TextEditingController(); // รับค่าจะ keyboard เเละมันมีอีกอันที่สามารตั้งค่าเริ่มต้นได้เลย คือ var price = 50 เป็นต้น 
   TextEditingController price = TextEditingController();
   TextEditingController result = TextEditingController();
 
