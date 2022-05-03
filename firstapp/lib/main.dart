@@ -31,18 +31,24 @@ class _HomeState extends State<Home> {
           child: Center(
             child: Column(
               children: [
-                Image.asset("2.jpg",width: 200,),
+                Image.asset("3.jpg",width: 200,),
                 SizedBox(height: 50,),
                 Text("Calculate Program" ,
                 style:TextStyle(fontSize: 50,color: Colors.red,fontStyle: FontStyle.italic)),
                 TextField(
                   decoration: InputDecoration(
-                    labelText: "Apple Amount",  border: OutlineInputBorder() , fillColor: Colors.red,
-                    )
+                    labelText: "Apple Amount",  border: OutlineInputBorder() , fillColor: Colors.red,)
                   ),
                   SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){},child: Text("Calculate")),
-                  SizedBox(height: 20,),
+                  ElevatedButton(onPressed: (){},
+                  child: Text("Calculate"),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Color(0xFF42A5F5)),
+                    padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(50, 20, 50, 20)),
+                    textStyle: MaterialStateProperty.all((TextStyle(fontSize: 30)))
+                  ),
+                  ),
+                  SizedBox(height: 20),
                   Text("by 5 Apples , 10 THB per an Apple , We have to pay 100 THB"),
 
               ],
