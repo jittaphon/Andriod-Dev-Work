@@ -1,89 +1,51 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
+import 'package:firstapp/pages/calc.dart';
+import 'package:firstapp/pages/contract.dart';
+import 'package:firstapp/pages/home.dart';
+import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:Scaffold(
-        appBar: AppBar(title: Text("Calculate App")),
-        body: Home(),
-        )
+      home:MainPage()
     );
   }
 }
 
-class Home extends StatefulWidget {
+class MainPage extends StatefulWidget {
+  const MainPage({ Key? key }) : super(key: key);
+
+
   @override
-  _HomeState createState() => _HomeState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _HomeState extends State<Home> {
-
-  TextEditingController quality = TextEditingController(); // รับค่าจะ keyboard เเละมันมีอีกอันที่สามารตั้งค่าเริ่มต้นได้เลย คือ var price = 50 เป็นต้น 
-  TextEditingController price = TextEditingController();
-  TextEditingController result = TextEditingController();
-
-  @override // สร้างตัว state มาเพื่อเเสดงผลใน หน้าจอ app
-  void initState() {
-    super.initState();
-    result.text = "by 5 Apples , 10 THB per an Apple , We have to pay 100 THB" ;
-  }
-
+class _MainPageState extends State<MainPage> {
+  int _currentIndex = 0;
+  final tabs = [Homepage(),CalculatePage(),ContractPage()];
+    
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 30, 20),
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset("3.jpg",width: 200,),
-                SizedBox(height: 50,),
-                Text("Calculate Program" ,
-                style:TextStyle(fontSize: 50,color: Colors.red,fontStyle: FontStyle.italic)),
-                TextField(
-                  controller: quality,
-                  decoration: InputDecoration(
-                    labelText: "Each Amount",  border: OutlineInputBorder() , fillColor: Colors.red,)
-                  ),
-                   SizedBox(height: 50,),
-                  TextField(
-                  controller: price,
-                  decoration: InputDecoration(
-                    labelText: "Each Price",  border: OutlineInputBorder() , fillColor: Colors.red,)
-                  ),
-                  SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){
-                    var cal = double.parse(quality.text)*double.parse(price.text); // คำนวณ
-                    print("Flower qunlity : ${quality.text} , so Total ${cal} BTH");// เช็คค่าที่ console 
-
-                    setState(() {
-                      result.text = "Flower qunlity : ${quality.text} , each cost ${price.text} so Total ${cal} BTH";
-                    });
-
-
-                  },
-                  child: Text("Calculate"),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Color(0xFF42A5F5)),
-                    padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(50, 20, 50, 20)),
-                    textStyle: MaterialStateProperty.all((TextStyle(fontSize: 30)))
-                  ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(result.text)
-
-              ],
-            ),
-            
-          ),
+    return Scaffold(
+        appBar: AppBar(title: Text("Calculate App")),
+        body:tabs[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,items: [
+             BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home Page"),
+             BottomNavigationBarItem(icon: Icon(Icons.calculate), label:"Calculate"),
+             BottomNavigationBarItem(icon: Icon(Icons.contact_mail), label:"Contact Aj tui")
+          ],
+          onTap: (index){
+            setState(() {
+              print(index);
+              _currentIndex = index;
+            });
+          },
         ),
-      ],
-    );
+        );
   }
 }
